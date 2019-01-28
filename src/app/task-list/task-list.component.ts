@@ -4,9 +4,11 @@ import { Task } from '../models/task.model';
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.css']
+  styleUrls: ['./task-list.component.css'],
 })
 export class TaskListComponent implements OnInit {
+
+  filterByCompleteness: string = "incompleteTasks";
 
   @Input() childTaskList: Task[];
   @Output() clickSender = new EventEmitter();
@@ -29,4 +31,12 @@ export class TaskListComponent implements OnInit {
       return "bg-info";
     }
   }
+
+  onChange(optionFromMenu) {
+    this.filterByCompleteness = optionFromMenu;
+  }
+
+  toggleDone(clickedTask: Task, setCompleteness: boolean) {
+   clickedTask.done = setCompleteness;
+ }
 }
